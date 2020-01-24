@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fullscreen Navigation</title>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.1.0/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Poppins&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/fullscreen-navigation/main.css">
+</head>
+<body>
+
+<h1>Responsive Navigation</h1>
+
+<div class="toggle-btn">
+    <span class="one"></span>
+    <span class="two"></span>
+</div>
+
+<div class="menu">
+    <div class="data">
+        <ul>
+            <li>Navigation</li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    const timeline = gsap.timeline({ paused: true })
+
+    timeline.to(".one", 0.8, {
+        y: 6,
+        rotation: 45,
+        ease: "expo.inOut",
+    })
+
+    timeline.to(".two", 0.8, {
+        y: -6,
+        rotation: -45,
+        ease: "expo.inOut",
+        delay: -0.8,
+    })
+
+    timeline.to(".menu", 2, {
+        top: "0%",
+        ease: "expo.inOut",
+        delay: -2,
+    })
+
+    timeline.staggerFrom(".menu ul li", 2, {
+        x: -200,
+        opacity: 0,
+        ease: "expo.inOut",
+    }, 0.3)
+
+    timeline.reverse()
+
+    $(document)
+        .on("click", ".toggle-btn", () => {
+            timeline.reversed(!timeline.reversed())
+        })
+    $(document)
+        .on("click", "a", () => {
+            timeline.reversed(!timeline.reversed())
+        })
+</script>
+</body>
+</html>
